@@ -1,0 +1,89 @@
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .admin-is-mobile .admin-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  
+  h1.admin-app-name {
+    margin-left: 8px;
+  }
+  
+  .admin-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  
+  .admin-is-mobile .admin-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+
+  #snav {
+      width: 100%;
+      color: aqua;
+  }
+  
+  /* #logoutBtn{
+    float: right;
+  } */
+
+  .spacer{
+    flex: 1 1 auto;
+  }
+
+
+  .admin-footer {
+    
+    /* background-color: rgb(185, 184, 184); */
+    background-color: #3F51B5;
+    display: flex;
+    height:49px;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-style: solid;
+    align-items: center;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: space-evenly;
+    color: white;
+ 
+  }
+
+  #user-icon{
+    cursor: pointer;
+  }
+
+
+  .full-width {
+    width: 100%;
+  }
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .submenu {
+    overflow-y: hidden;
+    transition: transform 300ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    padding-left: 30px;
+  }
+  .submenu.expanded {
+    transform: scaleY(1);
+  }
