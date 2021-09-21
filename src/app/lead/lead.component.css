@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.mat-form-field{
+    margin: 8pt;
+}
+
+.mat-raised-button{
+    margin: 8pt;
+}
+
+td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

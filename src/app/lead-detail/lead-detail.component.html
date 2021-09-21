@@ -1,0 +1,63 @@
+<form class="lead-form">
+    <tmplCmpntIdDropDown class="full-width" [tmplCmpntId]="lead.tmplCmpntId" [allowAll]=false [disabled]="mode!=0"></tmplCmpntIdDropDown>
+    <regionDropDown #region class="full-width" [region]="regionMap.get(lead.regnRefCde!)" [allowAll]=false [disabled]="mode!=0"></regionDropDown>
+    <suplrIdDropDown class="full-width" [suplrId]="lead.suplrId" [allowAll]=false [disabled]="mode!=0"></suplrIdDropDown>
+    <mat-form-field class="lead-full-width" appearance="fill" >
+        <mat-label>Seq No</mat-label>
+        <mat-select [(ngModel)]="lead.seqNbr" name="seqNbr" [disabled]="mode!=0">
+          <mat-option [value]="1">1</mat-option>
+          <mat-option [value]="2">2</mat-option>
+          <mat-option [value]="3">3</mat-option>
+          <mat-option [value]="4">4</mat-option>
+          <mat-option [value]="5">5</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="lead-full-width" appearance="fill">
+        <mat-label>Process Name</mat-label>
+        <input type="text" name="procNam"  matInput [(ngModel)]="lead.procNam">
+    </mat-form-field>
+    <regionDropDown #procRegn class="full-width" [region]="regionMap.get(lead.procRegnRefCde!)" label="Process Region" [allowAll]=false></regionDropDown>
+    <mat-form-field class="lead-full-width" appearance="fill" >
+        <mat-label>Process Type</mat-label>
+        <mat-select [(ngModel)]="lead.procType" name="procType">
+          <mat-option value="Parallel">Parallel</mat-option>
+          <mat-option value="Sequential">Sequential</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="lead-full-width" appearance="fill">
+        <mat-label>Lead Time Have Stock</mat-label>
+        <input type="number" name="leadTimeHvStock" [(ngModel)]="lead.leadTimeHvStock"  matInput [formControl]="leadtimeHaveStockFormControl" [errorStateMatcher]="matcher"
+               placeholder="99" >
+        <mat-error *ngIf="leadtimeHaveStockFormControl.hasError('pattern')&& !leadtimeHaveStockFormControl.hasError('required')">
+          Please enter a valid Lead Time Have Stock
+        </mat-error>
+        <mat-error *ngIf="leadtimeHaveStockFormControl.hasError('required')">
+            Lead Time Have Stock is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="lead-full-width" appearance="fill">
+        <mat-label>Lead Time Without Stock</mat-label>
+        <input type="number" name="leadTimeWoutStock" [(ngModel)]="lead.leadTimeWoutStock" matInput [formControl]="leadtimeWithoutStockFormControl" [errorStateMatcher]="matcher"
+               placeholder="99">
+        <mat-error *ngIf="leadtimeWithoutStockFormControl.hasError('pattern')&& !leadtimeWithoutStockFormControl.hasError('required')">
+          Please enter a valid Lead Time Without Stock
+        </mat-error>
+        <mat-error *ngIf="leadtimeWithoutStockFormControl.hasError('required')">
+            Lead Time Without Stock is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="lead-full-width" appearance="fill">
+        <mat-label>Rule Json Content</mat-label>
+        <input  matInput name="ruleJsonCtent" [(ngModel)]="lead.ruleJsonCtent">
+    </mat-form-field>
+
+    <mat-form-field class="lead-full-width" appearance="fill">
+        <mat-label>Priority</mat-label>
+        <input type="number" matInput name="pri" [(ngModel)]="lead.pri">
+    </mat-form-field>
+
+    <button *ngIf="mode==1"  mat-raised-button (click)=updateRecord()>Update</button>
+    <button *ngIf="mode==0"  mat-raised-button (click)=addRecord()>Add</button>
+</form>

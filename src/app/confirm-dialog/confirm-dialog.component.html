@@ -1,0 +1,8 @@
+<h3 md-dialog-title>Confirm</h3>
+<div md-dialog-content>{{confirmMessage}}</div>
+<br/>
+<div md-dialog-actions>
+  <button style="left:30px" mat-raised-button (click)="dialogRef.close(true)">Confirm</button>
+  
+  <button style="left:50px" mat-raised-button (click)="dialogRef.close(false)">Cancel</button>
+</div>

@@ -1,0 +1,90 @@
+<div class="mat-elevation-z8">
+    <div #searchFormContainer>
+      <tmplCmpntIdDropDown (changeEvent)=reload()></tmplCmpntIdDropDown>
+      <suplrIdDropDown (changeEvent)=reload()></suplrIdDropDown>
+      <regionDropDown (changeEvent)=reload()></regionDropDown>
+      <button mat-raised-button (click)="reload()">reload</button>
+      <button mat-raised-button (click)="add()">add</button>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="tmplCmpntId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Component Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.tmplCmpntId}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="regnRefCde">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
+        <td mat-cell *matCellDef="let element"> {{regionMap.get(element.regnRefCde)}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="suplrId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Supler Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.suplrId}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="seqNbr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sequence</th>
+        <td mat-cell *matCellDef="let element"> {{element.seqNbr}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="procNam">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Process Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.procNam}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="procRegnRefCde">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Process Region</th>
+        <td mat-cell *matCellDef="let element"> {{regionMap.get(element.procRegnRefCde)}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="procType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Process Type</th>
+        <td mat-cell *matCellDef="let element"> {{element.procType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="leadTimeHvStock">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Lead Time Have Stock</th>
+        <td mat-cell *matCellDef="let element"> {{element.leadTimeHvStock}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="leadTimeWoutStock">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Lead Time Without Stock</th>
+        <td mat-cell *matCellDef="let element"> {{element.leadTimeWoutStock}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="ruleJsonCtent">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rule Json </th>
+        <td title="{{element.ruleJsonCtent}}" mat-cell *matCellDef="let element"> {{element.ruleJsonCtent}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pri" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+        <td title="{{element.pri}}" mat-cell *matCellDef="let element"> {{element.pri}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="width:200px"> Actions </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary" (click)="updateRow(row)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="deleteConfirmation(row)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Click to manage lead time" class="iconbutton" color="primary" (click)="manageLeadTime(row)">
+            <mat-icon aria-label="Settings">settings</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator  [pageSizeOptions]="[10,50]" (page)=page() showFirstLastButtons ></mat-paginator>
+    
+  </div>
+    
