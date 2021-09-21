@@ -1,0 +1,11 @@
+
+{
+  "/apis/*": {
+    "target": "http://localhost:10005",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
+
+
