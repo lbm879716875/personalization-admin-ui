@@ -1,0 +1,41 @@
+<form class="promotion-form">
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Inventory Id</mat-label>
+        <input type="text"  matInput [formControl]="invntIdFormControl" [errorStateMatcher]="matcher"
+               placeholder="10376150870,10368087830,..." [readonly]="mode==1">
+        <mat-error *ngIf="invntIdFormControl.hasError('pattern')&& !invntIdFormControl.hasError('required')">
+          Please enter a valid Inventory Id
+        </mat-error>
+        <mat-error *ngIf="invntIdFormControl.hasError('required')">
+            Inventory Id is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <regionDropDown class='full-width' [disabled]="mode!=0" [region]="codeToRegionMap.get(persInvntDisc.regnRefCde!)" [allowAll]=false></regionDropDown>
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Discount Tag</mat-label>
+        <input type="text"  matInput [formControl]="discTagFormControl" [errorStateMatcher]="matcher"
+               placeholder="P2020111" [readonly]=true>
+        <mat-error *ngIf="discTagFormControl.hasError('pattern')&& !discTagFormControl.hasError('required')">
+          Please enter a valid Discount Tag
+        </mat-error>
+        <mat-error *ngIf="discTagFormControl.hasError('required')">
+            Discount Tag is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input matInput [formControl]="startDateFormControl" [matDatepicker]="startDatePicker" [readonly]="mode==1">
+        <mat-datepicker-toggle *ngIf="mode==0" matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input matInput [formControl]="endDateFormControl" [matDatepicker]="endDatePicker">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+
+
+    <button *ngIf="mode==1"  mat-raised-button (click)=updateRecord()>Update</button>
+    <button *ngIf="mode==0"  mat-raised-button (click)=addRecord()>Add</button>
+</form>

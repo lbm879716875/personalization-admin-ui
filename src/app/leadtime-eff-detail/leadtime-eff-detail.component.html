@@ -1,0 +1,44 @@
+<p>{{mode==0?'Add':'Edit'}} Schedule</p>
+<form class="promotion-form">
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input matInput [formControl]="effDateFormControl" [matDatepicker]="effDatePicker">
+        <mat-datepicker-toggle matSuffix [for]="effDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #effDatePicker></mat-datepicker>
+    </mat-form-field>
+    <br/>
+    <mat-form-field class="leadtime-full-width" appearance="fill">
+        <mat-label>Lead Time Have Stock</mat-label>
+        <input type="number"  matInput [formControl]="leadtimeHaveStockFormControl" [errorStateMatcher]="matcher"
+               placeholder="99" >
+        <mat-error *ngIf="leadtimeHaveStockFormControl.hasError('pattern')&& !leadtimeHaveStockFormControl.hasError('required')">
+          Please enter a valid Lead Time Have Stock
+        </mat-error>
+        <mat-error *ngIf="leadtimeHaveStockFormControl.hasError('required')">
+            Lead Time Have Stock is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field  appearance="fill">
+        <mat-label>Lead Time Without Stock</mat-label>
+        <input type="number" matInput [formControl]="leadtimeWithoutStockFormControl" [errorStateMatcher]="matcher"
+               placeholder="99">
+        <mat-error *ngIf="leadtimeWithoutStockFormControl.hasError('pattern')&& !leadtimeWithoutStockFormControl.hasError('required')">
+          Please enter a valid Lead Time Without Stock
+        </mat-error>
+        <mat-error *ngIf="leadtimeWithoutStockFormControl.hasError('required')">
+            Lead Time Without Stock is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field  appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="leadtimeEff!.statCde" name="statCde">
+          <mat-option value="A">Active</mat-option>
+          <mat-option value="D">Deactive</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br/>
+    <button *ngIf="mode==1"  mat-raised-button (click)=updateRecord()>Update</button>
+    <button *ngIf="mode==0"  mat-raised-button (click)=addRecord()>Add</button>
+</form>

@@ -1,0 +1,47 @@
+<form class="promotion-form">
+    <regionDropDown [disabled]="mode!=0" class="full-width" [region]="dbRegionValueMap.get(persDiscDesc.db)" [allowAll]=false></regionDropDown>
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Discount Tag</mat-label>
+        <input type="text"  matInput [formControl]="discTagFormControl" [errorStateMatcher]="matcher"
+               placeholder="P2020111" >
+        <mat-error *ngIf="discTagFormControl.hasError('pattern')&& !discTagFormControl.hasError('required')">
+          Please enter a valid Discount Tag
+        </mat-error>
+        <mat-error *ngIf="discTagFormControl.hasError('required')">
+            Discount Tag is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Statc Description(English)</mat-label>
+        <input type="text"  matInput [formControl]="statcDescFormControl" [errorStateMatcher]="matcher"
+               placeholder="description" >
+        <mat-error *ngIf="statcDescFormControl.hasError('pattern')&& !statcDescFormControl.hasError('required')">
+          Please enter a valid Statc Description(English)
+        </mat-error>
+        <mat-error *ngIf="statcDescFormControl.hasError('required')">
+            Statc Description(English) is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Statc Description(Traditional Chinese)</mat-label>
+        <input type="text"  matInput [formControl]="statcDescCFormControl" [errorStateMatcher]="matcher"
+               placeholder="描述" >
+        <mat-error *ngIf="statcDescCFormControl.hasError('required')">
+            Statc Description(Traditional Chinese) is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="promotion-full-width" appearance="fill">
+        <mat-label>Statc Description(Simplified Chinese)</mat-label>
+        <input type="text"  matInput [formControl]="statcDescCZhsFormControl" [errorStateMatcher]="matcher"
+               placeholder="描述" >
+        <mat-error *ngIf="statcDescCZhsFormControl.hasError('required')">
+            Statc Description(Simplified Chinese) is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <button *ngIf="mode==1"  mat-raised-button (click)=updateRecord()>Update</button>
+    <button *ngIf="mode==0"  mat-raised-button (click)=addRecord()>Add</button>
+</form>

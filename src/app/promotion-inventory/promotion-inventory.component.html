@@ -1,0 +1,54 @@
+<div class="mat-elevation-z8">
+    <div #actionContainer>
+        <button mat-raised-button (click)="reload()">reload</button>
+        <button mat-raised-button (click)="add()">add</button>
+        <button mat-raised-button (click)="clearAllConfirmation()">clearAll</button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="invntId">
+            <th mat-header-cell *matHeaderCellDef> Inventory Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.invntId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="region">
+            <th mat-header-cell *matHeaderCellDef> Region </th>
+            <td mat-cell *matCellDef="let element"> {{codeToRegionMap.get(element.regnRefCde)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="discTag">
+            <th mat-header-cell *matHeaderCellDef> Discount Tag </th>
+            <td mat-cell *matCellDef="let element"> {{element.discTag}} </td>
+        </ng-container>
+        <ng-container matColumnDef="startDte">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.startDte|date:'yyyy-MM-dd'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="endDte">
+            <th mat-header-cell *matHeaderCellDef> End Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.endDte|date:'yyyy-MM-dd'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastModEmplNbr">
+            <th mat-header-cell *matHeaderCellDef> lastModEmplNbr </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastModEmplNbr}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastModDte">
+            <th mat-header-cell *matHeaderCellDef> lastModDte </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastModDte}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary" (click)="updateRow(row)">
+                  <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="deleteConfirmation(row)">
+                  <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10,50]" (page)=page() showFirstLastButtons ></mat-paginator>
+</div>
